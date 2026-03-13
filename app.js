@@ -18,21 +18,25 @@ async function dbConection(){
 }
 // call db connsection
 dbConection()
+
+
+
 //create port
+
+
 const Port =  process.env.PORT || 3000;
 //routes
+const authParent = require("./Routers/authParentRoutes")
 
+const authTeacher = require("./Routers/authTeacherRoutes")
 
+const authStudent =require("./Controllers/authStudentController");
 
-
-
-
-
-
-
-
+app.use("/api/parent",authParent);
+app.use("/api/techer",authTeacher);
+app.use("/api/student",authStudent)
 
 //app listener
-app.listen(Port,()=>{
-    console.log(`the server in running at port ${Port}`)
+app.listen(port,()=>{
+    console.log(`the server is running at port${port}`)
 })
