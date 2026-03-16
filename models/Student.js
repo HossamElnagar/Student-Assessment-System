@@ -10,7 +10,7 @@ const addressSchema= new mongoose.schema({
     }
 })
 const studentSchema = new mongoose.Schema({
-    name:{
+    username:{
         type:String,
         required:true,
         trim:true
@@ -37,12 +37,29 @@ const studentSchema = new mongoose.Schema({
         unique:true,
         required:true,
         lowercase:true,
-        trim:true
+        trim:true,
+        validate: {
+
+        validator: function(value) {
+
+            // Regex علشان يتاكد صيغة الإيميل الصحيحة
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            return emailRegex.test(value);
+
+        },
+
+        // props.value هي القيمة اللي دخلها المستخدم
+
+        message: props => `${props.value} is not a valid email address!`
+
+    }
     },
     password:{
         type:String,
         required:true,
-        select:false
+        select:false //عندما أقوم بجلب بيانات المستخدم، لا تظهر هذا الحقل أبداً بشكل تلقائي
     }
 
 })

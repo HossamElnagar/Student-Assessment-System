@@ -3,11 +3,13 @@ const mongoose = require("mongoose");
 const subjectSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true
+    required: true,
+    trim:true
   },
 
   grade: {
     type: String,
+    enum:[A,B,C,D],
     required: true
   },
 

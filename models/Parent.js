@@ -11,7 +11,7 @@ const addressSchema= new mongoose.schema({
     }
 })
 const parentSchema = new mongoose.schema({
-    name:{
+    username:{
         type:String,
         trim:true,
         required :true
@@ -27,7 +27,24 @@ const parentSchema = new mongoose.schema({
         required:true,
         trim:true,
         unique:true,
-        lowercase:true
+        lowercase:true,
+        validate: {
+
+        validator: function(value) {
+
+            // Regex علشان يتاكد صيغة الإيميل الصحيحة
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            return emailRegex.test(value);
+
+        },
+
+        // props.value هي القيمة اللي دخلها المستخدم
+
+        message: props => `${props.value} is not a valid email address!`
+
+    }
     },
     password:{
         type: String,

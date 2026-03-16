@@ -53,6 +53,8 @@ const assessmentSchema = new mongoose.Schema({
             const end = parseInt(year[1]);  //2027
             return (start==end-1); //هيكمل true
         },
+        //لو حصل خطا هيطبع الرسالة دي 
+        //props هو object بيرسل في حالة الخطا
         //props.value القيمة اللي المستخدم دخلها
         message: props => `${props.value} not a valid academic year`//السطلر ده بيتنفذ لو حصل false فوق
     }
